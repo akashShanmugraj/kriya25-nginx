@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_cdn
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./mime.types:/etc/nginx/mime.types:ro
+      - ./content:/usr/share/nginx/cdn:ro
+    networks:
+      - cdn_network
+
+networks:
+  cdn_network:
+    driver: bridge

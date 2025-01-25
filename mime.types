@@ -1,0 +1,6 @@
+types {
+    application/pdf  pdf;
+    image/png        png;
+    image/jpeg       jpg jpeg;
+    # Add other MIME types as needed
+}
