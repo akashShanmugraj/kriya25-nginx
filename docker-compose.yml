@@ -14,6 +14,22 @@ services:
     networks:
       - cdn_network
 
+  payment_service_1:
+    image: payment1
+    container_name: payment_service_1
+    ports:
+      - "6010:6010"
+    networks:
+      - cdn_network
+
+  payment_service_2:
+    image: payment2
+    container_name: payment_service_2
+    ports:
+      - "6011:6011"
+    networks:
+      - cdn_network
+
 networks:
   cdn_network:
     driver: bridge
