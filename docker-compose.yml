@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  nginxmongo:
+    image: mongo
+    ports:
+      - "27030:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - cdn_network
+
   nginx:
     image: nginx:latest
     container_name: nginx_cdn
@@ -17,6 +29,8 @@ services:
   payment_service_1:
     image: payment1
     container_name: payment_service_1
+    environment:
+      - MONGOURI=mongodb://admin:password@nginxmongo:27017
     ports:
       - "6010:6010"
     networks:
@@ -25,6 +39,8 @@ services:
   payment_service_2:
     image: payment2
     container_name: payment_service_2
+    environment:
+      - MONGOURI=mongodb://admin:password@nginxmongo:27017
     ports:
       - "6011:6011"
     networks:
