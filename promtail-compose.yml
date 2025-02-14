@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  promtail:
+    image: grafana/promtail:v2.9.1  # Use the latest Promtail image
+    container_name: promtail
+    volumes:
+      - /var/log/nginx:/var/log/nginx:ro  # Mount NGINX logs into the container (read-only)
+      - ./promtail-data:/etc/promtail  # Mount the Promtail config if you want to use a custom config file
+    command: -config.file=/etc/promtail/promtail.yaml  # Point to the config file
+    restart: always
