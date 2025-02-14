@@ -6,6 +6,6 @@ services:
     container_name: promtail
     volumes:
       - /var/log/nginx:/var/log/nginx:ro  # Mount NGINX logs into the container (read-only)
-      - ./promtail-data:/etc/promtail  # Mount the Promtail config if you want to use a custom config file
+      - /promtail.yaml:/etc/promtail/promtail.yaml  # Mount the Promtail config file
     command: -config.file=/etc/promtail/promtail.yaml  # Point to the config file
     restart: always

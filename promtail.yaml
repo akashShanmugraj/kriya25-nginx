@@ -9,10 +9,17 @@ positions:
   filename: /tmp/positions.yaml
 
 scrape_configs:
-  - job_name: nginx
+  - job_name: nginx_access
     static_configs:
       - targets:
           - localhost
         labels:
           job: nginx
-          __path__: /var/log/nginx/*.log  # Path to your NGINX log files
+          __path__: /var/log/nginx/access.log  # Path to your NGINX log files
+  - job_name: nginx_error
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          __path__: /var/log/nginx/error.log  # Path to your NGINX error log files
